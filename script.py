@@ -7,21 +7,13 @@ from random import randint,shuffle
 
 def get_html(url):
     html_content = ''
-    #try:
-    req = Request(url, headers={'User-Agent':'Mozilla/5.0'}, timeout=60)
-    html_page = urlopen(req).read()
-    html_content = BeautifulSoup(html_page, "html.parser")
-    '''except: 
-        try:
-            print('long sleep')
-            sleep(randint(800,1500))
-            req = Request(url, headers={'User-Agent':'Mozilla/5.0'}, timeout=60)
-            html_page = urlopen(req).read()
-            html_content = BeautifulSoup(html_page, "html.parser")
-        except:
-            pass
+    try:
+        req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        html_page = urlopen(req).read()
+        html_content = BeautifulSoup(html_page, "html.parser")
+    except: 
+        pass
         
-    '''
     return html_content
 
 def get_category_items(category_url):
