@@ -71,7 +71,7 @@ def get_details(url):
 
     try:
         raw_text = html.find_all("div", {"class":"woocommerce-product-details__short-description"})[0].get_text()
-        stamp['raw_text'] = raw_text
+        stamp['raw_text'] = raw_text.replace('\n',' ')
     except:
         stamp['raw_text'] = None
 
@@ -101,7 +101,8 @@ def get_details(url):
     stamp['scrape_date'] = scrape_date
 
     stamp['url'] = url
-    print(stamp,'+++++++++++++')
+    print(stamp)
+    print('+++++++++++++')
     sleep(randint(22,99))
     return stamp
 
