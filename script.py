@@ -1,19 +1,19 @@
 import re
 import datetime
 import os
-import sqlite3
-from fake_useragent import UserAgent
+#import sqlite3
+#from fake_useragent import UserAgent
 import shutil
-from stem import Signal
-from stem.control import Controller
-import socket
-import socks
+#from stem import Signal
+#from stem.control import Controller
+#import socket
+#import socks
 import requests
 from random import randint, shuffle
 from time import sleep
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
-
+'''
 controller = Controller.from_port(port=9051)
 controller.authenticate()
 
@@ -43,11 +43,11 @@ hdr = {'User-Agent': "'"+UA.random+"'",
        'Accept-Encoding': 'none',
        'Accept-Language': 'en-US,en;q=0.8',
        'Connection': 'keep-alive'}
-
+'''
 def get_html(url):
     html_content = ''
     try:
-        req = Request(url, headers=hdr)
+        req = Request(url, headers={'User-Agent': 'Mozilla/5.0'}) #hdr)
         html_page = urlopen(req).read()
         html_content = BeautifulSoup(html_page, "html.parser")
     except: 
@@ -163,7 +163,7 @@ def get_details(url):
     print('+++++++++++++')
     sleep(randint(22,99))
     return stamp
-
+'''
 def query_for_previous(stamp):
     # CHECKING IF Stamp IN DB
     os.chdir("/Volumes/Stamps/")
@@ -263,7 +263,7 @@ def db_update_image_download(stamp):
     print ("all updated")
     print ("++++++++++++")
     sleep(randint(35,100)) 
-
+'''
 # start url
 
 start_url = 'https://kentonphilatelics.com/product-category/stamps/'
@@ -277,8 +277,8 @@ selection = input('Make a selection: ')
 
 # loop through all categories
 count = 0
-connectTor()
-showmyip()
+#connectTor()
+#showmyip()
 categories = get_categories(selection)
 for category in categories:
     # loop through all subcategories
@@ -292,12 +292,12 @@ for category in categories:
             count+=1
             if count > randint(75,156):
                 sleep(randint(500,2000))
-                connectTor()
-                showmyip()
+                #connectTor()
+                #showmyip()
                 count = 0
             else:
                 pass
             stamp = get_details(category_item)
-            query_for_previous(stamp)
-            db_update_image_download(stamp)
+            #query_for_previous(stamp)
+            #db_update_image_download(stamp)
             count += len(file_names(stamp))
